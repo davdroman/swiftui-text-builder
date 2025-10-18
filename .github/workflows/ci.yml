@@ -47,6 +47,8 @@ jobs:
           action: none
           verbosity: xcbeautify
 
+      - run: defaults write com.apple.dt.Xcode IDEPackageEnablePrebuilts -bool NO
+
       - if: matrix.platform != 'mac-catalyst' && matrix.platform != 'macOS'
         name: Download Required Runtime
         run: xcodebuild -downloadPlatform ${{ matrix.platform }}
