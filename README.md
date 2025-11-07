@@ -1,6 +1,6 @@
 # TextBuilder
 
-![CI status](https://github.com/davdroman/swiftui-text-builder/workflows/CI/badge.svg)
+[![CI](https://github.com/davdroman/swiftui-text-builder/actions/workflows/ci.yml/badge.svg)](https://github.com/davdroman/swiftui-text-builder/actions/workflows/ci.yml)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fdavdroman%2Fswiftui-text-builder%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/davdroman/swiftui-text-builder)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fdavdroman%2Fswiftui-text-builder%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/davdroman/swiftui-text-builder)
 
