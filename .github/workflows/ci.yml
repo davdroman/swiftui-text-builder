@@ -69,3 +69,17 @@ jobs:
           action: test
           scheme: swiftui-text-builder
           verbosity: xcbeautify
+
+  check-swift-syntax-compatibility:
+    name: Swift Syntax Compatibility Check
+    runs-on: macos-latest
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v5
+
+      - name: Run Swift Syntax Compatibility Check
+        uses: davdroman/swift-macro-compatibility-check@from-version
+        with:
+          run-tests: false
+          from-version: "600.0.0"
+          major-versions-only: true
