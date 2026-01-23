@@ -54,6 +54,10 @@ jobs:
           rm -rf ~/Library/Caches/org.swift.swiftpm
 
       - if: ${{ matrix.platform != 'macOS' && matrix.platform != 'mac-catalyst' }}
+        name: Initialize Simulator Service
+        run: xcrun simctl list
+
+      - if: ${{ matrix.platform != 'macOS' && matrix.platform != 'mac-catalyst' }}
         name: Download Default Runtime
         uses: nick-fields/retry@v3
         with:
