@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  macOS:
+  apple:
     if: github.event_name != 'pull_request' || !contains(github.event.pull_request.title, '[skip ci]')
     name: ${{ matrix.platform }} (Swift ${{ matrix.swift }})
     runs-on: macos-15
@@ -27,8 +27,8 @@ jobs:
           - mac-catalyst
           - macOS
           - tvOS
-          - visionOS
           - watchOS
+          - visionOS
         swift:
           - "6.0"
           - "6.1"
@@ -44,13 +44,18 @@ jobs:
           action: none
           verbosity: xcbeautify
 
-      - if: matrix.platform != 'mac-catalyst' && matrix.platform != 'macOS'
-        name: Download Required Runtime
-        run: xcodebuild -downloadPlatform ${{ matrix.platform }}
+      - name: Disable SwiftSyntax Prebuilts
+        run: |
+          defaults write com.apple.dt.Xcode IDEPackageEnablePrebuilts -bool NO
 
-      - if: matrix.platform != 'mac-catalyst' && matrix.platform != 'macOS'
-        name: List Available Simulators
-        run: xcrun simctl list devices
+          # nuke cache to ensure it takes effect
+          rm -rf ~/Library/Developer/Xcode/DerivedData
+          rm -rf ~/Library/Developer/Xcode/SourcePackages
+          rm -rf ~/Library/Caches/org.swift.swiftpm
+
+      - if: ${{ matrix.platform != 'macOS' && matrix.platform != 'mac-catalyst' }}
+        name: Download Default Runtime
+        run: xcodebuild -downloadPlatform ${{ matrix.platform }}
 
       - name: Run Tests
         uses: mxcl/xcodebuild@v3
