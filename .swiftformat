@@ -9,6 +9,8 @@
 --trailing-commas always
 --nil-init insert
 --import-grouping testable-last
+--wrap-conditions before-first
+--guard-else next-line
 
 # Disabled rules
 --disable blankLinesAroundMark
@@ -21,6 +23,7 @@
 --disable redundantStaticSelf
 --disable redundantType
 --disable redundantTypedThrows
+--disable redundantViewBuilder
 --disable unusedArguments
 --disable wrapFunctionBodies
 --disable wrapPropertyBodies
