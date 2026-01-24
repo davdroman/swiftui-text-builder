@@ -20,7 +20,7 @@ struct TextBuilderMacroTests {
 			"""
 		)
 	)
-	func computedVarWithoutImplementation() throws {
+	func computedVarWithoutImplementation() {
 		assertMacro {
 			"""
 			@TextBuilder
@@ -45,7 +45,7 @@ struct TextBuilderMacroTests {
 			"""
 		)
 	)
-	func computedVarWithoutSeparator() throws {
+	func computedVarWithoutSeparator() {
 		assertMacro {
 			"""
 			@TextBuilder
@@ -101,7 +101,7 @@ struct TextBuilderMacroTests {
 			"""
 		)
 	)
-	func computedVarWithLiteralSeparator() throws {
+	func computedVarWithLiteralSeparator() {
 		assertMacro {
 			"""
 			@TextBuilder(separator: " ")
@@ -157,7 +157,7 @@ struct TextBuilderMacroTests {
 			"""
 		)
 	)
-	func computedVarWithNonLiteralSeparator() throws {
+	func computedVarWithNonLiteralSeparator() {
 		assertMacro {
 			"""
 			let separator = " "
@@ -206,7 +206,7 @@ struct TextBuilderMacroTests {
 		}
 	}
 
-	@Test func functionWithoutImplementation() throws {
+	@Test func functionWithoutImplementation() {
 		assertMacro {
 			"""
 			@TextBuilder
@@ -222,7 +222,7 @@ struct TextBuilderMacroTests {
 		}
 	}
 
-	@Test func functionWithoutSeparator() throws {
+	@Test func functionWithoutSeparator() {
 		assertMacro {
 			"""
 			@TextBuilder
@@ -269,7 +269,7 @@ struct TextBuilderMacroTests {
 		}
 	}
 
-	@Test func functionWithLiteralSeparator() throws {
+	@Test func functionWithLiteralSeparator() {
 		assertMacro {
 			"""
 			@TextBuilder(separator: " ")
@@ -316,7 +316,7 @@ struct TextBuilderMacroTests {
 		}
 	}
 
-	@Test func functionWithNonLiteralSeparator() throws {
+	@Test func functionWithNonLiteralSeparator() {
 		assertMacro {
 			"""
 			let separator = " "

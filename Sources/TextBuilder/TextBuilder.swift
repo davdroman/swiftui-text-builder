@@ -42,4 +42,3 @@ public macro TextBuilder<Separator: StringProtocol>(separator: Separator) = #ext
 	module: "TextBuilderMacro",
 	type: "TextBuilderMacro"
 )
-

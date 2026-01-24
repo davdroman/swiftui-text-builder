@@ -18,7 +18,7 @@ struct TextBuilderMacro: BodyMacro {
 		return [
 			"""
 			Text(separator: \(separatorExpr)) { \(statements) }
-			"""
+			""",
 		]
 	}
 }

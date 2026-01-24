@@ -29,9 +29,9 @@ struct TextBuilderTests {
 		expectNoDifference(
 			sut(),
 			Text("Lorem").underline().foregroundColor(.blue) +
-			Text("ipsum dolor") +
-			Text("sit").bold() +
-			Text("amet, consectetur")
+				Text("ipsum dolor") +
+				Text("sit").bold() +
+				Text("amet, consectetur")
 		)
 	}
 
@@ -47,12 +47,12 @@ struct TextBuilderTests {
 		expectNoDifference(
 			sut(),
 			Text("Lorem").underline().foregroundColor(.blue) +
-			Text(verbatim: " ") +
-			Text("ipsum dolor") +
-			Text(verbatim: " ") +
-			Text("sit").bold() +
-			Text(verbatim: " ") +
-			Text("amet, consectetur")
+				Text(verbatim: " ") +
+				Text("ipsum dolor") +
+				Text(verbatim: " ") +
+				Text("sit").bold() +
+				Text(verbatim: " ") +
+				Text("amet, consectetur")
 		)
 	}
 
@@ -68,12 +68,12 @@ struct TextBuilderTests {
 		expectNoDifference(
 			sut(),
 			Text("Lorem").underline().foregroundColor(.blue) +
-			Text(verbatim: "\n") +
-			Text("ipsum dolor") +
-			Text(verbatim: "\n") +
-			Text("sit").bold() +
-			Text(verbatim: "\n") +
-			Text("amet, consectetur")
+				Text(verbatim: "\n") +
+				Text("ipsum dolor") +
+				Text(verbatim: "\n") +
+				Text("sit").bold() +
+				Text(verbatim: "\n") +
+				Text("amet, consectetur")
 		)
 	}
 
@@ -89,12 +89,12 @@ struct TextBuilderTests {
 		expectNoDifference(
 			sut(),
 			Text("Lorem").underline().foregroundColor(.blue) +
-			Text(verbatim: " 👏 ") +
-			Text("ipsum dolor") +
-			Text(verbatim: " 👏 ") +
-			Text("sit").bold() +
-			Text(verbatim: " 👏 ") +
-			Text("amet, consectetur")
+				Text(verbatim: " 👏 ") +
+				Text("ipsum dolor") +
+				Text(verbatim: " 👏 ") +
+				Text("sit").bold() +
+				Text(verbatim: " 👏 ") +
+				Text("amet, consectetur")
 		)
 	}
 
@@ -121,16 +121,16 @@ struct TextBuilderTests {
 		expectNoDifference(
 			sut(),
 			Text(verbatim: "Lorem").underline().foregroundColor(.blue) +
-			Text(verbatim: " ") +
-			Text(verbatim: "sit").bold() +
-			Text(verbatim: " ") +
-			Text(verbatim: "amet, consectetur") +
-			Text(verbatim: " ") +
-			Text(verbatim: "1") +
-			Text(verbatim: " ") +
-			Text(verbatim: "2") +
-			Text(verbatim: " ") +
-			Text(verbatim: "3")
+				Text(verbatim: " ") +
+				Text(verbatim: "sit").bold() +
+				Text(verbatim: " ") +
+				Text(verbatim: "amet, consectetur") +
+				Text(verbatim: " ") +
+				Text(verbatim: "1") +
+				Text(verbatim: " ") +
+				Text(verbatim: "2") +
+				Text(verbatim: " ") +
+				Text(verbatim: "3")
 		)
 	}
 }
