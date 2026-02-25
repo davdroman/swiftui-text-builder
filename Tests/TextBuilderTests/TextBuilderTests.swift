@@ -14,7 +14,7 @@ struct TextBuilderTests {
 
 		expectNoDifference(
 			sut(),
-			Text(verbatim: "")
+			Text(verbatim: ""),
 		)
 	}
 
@@ -32,7 +32,7 @@ struct TextBuilderTests {
 			Text("Lorem").underline().foregroundColor(.blue) +
 				Text("ipsum dolor") +
 				Text("sit").bold() +
-				Text("amet, consectetur")
+				Text("amet, consectetur"),
 		)
 	}
 
@@ -53,7 +53,7 @@ struct TextBuilderTests {
 				Text(verbatim: " ") +
 				Text("sit").bold() +
 				Text(verbatim: " ") +
-				Text("amet, consectetur")
+				Text("amet, consectetur"),
 		)
 	}
 
@@ -74,7 +74,7 @@ struct TextBuilderTests {
 				Text(verbatim: "\n") +
 				Text("sit").bold() +
 				Text(verbatim: "\n") +
-				Text("amet, consectetur")
+				Text("amet, consectetur"),
 		)
 	}
 
@@ -95,7 +95,7 @@ struct TextBuilderTests {
 				Text(verbatim: " 👏 ") +
 				Text("sit").bold() +
 				Text(verbatim: " 👏 ") +
-				Text("amet, consectetur")
+				Text("amet, consectetur"),
 		)
 	}
 
@@ -131,7 +131,7 @@ struct TextBuilderTests {
 				Text(verbatim: " ") +
 				Text(verbatim: "2") +
 				Text(verbatim: " ") +
-				Text(verbatim: "3")
+				Text(verbatim: "3"),
 		)
 	}
 }

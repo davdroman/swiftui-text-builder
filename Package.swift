@@ -35,7 +35,7 @@ let package = Package(
 			"TextBuilderMacro",
 			.product(name: "MacroTesting", package: "swift-macro-testing"),
 		]),
-	]
+	],
 )
 
 package.dependencies += [

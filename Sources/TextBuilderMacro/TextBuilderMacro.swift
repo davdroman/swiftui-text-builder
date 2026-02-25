@@ -6,7 +6,7 @@ struct TextBuilderMacro: BodyMacro {
 	static func expansion(
 		of node: AttributeSyntax,
 		providingBodyFor declaration: some DeclSyntaxProtocol & WithOptionalCodeBlockSyntax,
-		in context: some MacroExpansionContext
+		in context: some MacroExpansionContext,
 	) throws -> [CodeBlockItemSyntax] {
 		let separatorExpr: ExprSyntax = if let args = node.arguments, case let .argumentList(list) = args, let first = list.first {
 			first.expression

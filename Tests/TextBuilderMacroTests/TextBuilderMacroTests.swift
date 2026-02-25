@@ -9,8 +9,8 @@ import Testing
 	.macros(
 		[TextBuilderMacro.self],
 		indentationWidth: .tab,
-		record: .missing
-	)
+		record: .missing,
+	),
 )
 struct TextBuilderMacroTests {
 	@Test(
@@ -19,8 +19,8 @@ struct TextBuilderMacroTests {
 			Body Macros aren't compatible with computed properties yet.
 
 			See: https://github.com/swiftlang/swift/issues/75715
-			"""
-		)
+			""",
+		),
 	)
 	func computedVarWithoutImplementation() {
 		assertMacro {
@@ -44,8 +44,8 @@ struct TextBuilderMacroTests {
 			Body Macros aren't compatible with computed properties yet.
 
 			See: https://github.com/swiftlang/swift/issues/75715
-			"""
-		)
+			""",
+		),
 	)
 	func computedVarWithoutSeparator() {
 		assertMacro {
@@ -100,8 +100,8 @@ struct TextBuilderMacroTests {
 			Body Macros aren't compatible with computed properties yet.
 
 			See: https://github.com/swiftlang/swift/issues/75715
-			"""
-		)
+			""",
+		),
 	)
 	func computedVarWithLiteralSeparator() {
 		assertMacro {
@@ -156,8 +156,8 @@ struct TextBuilderMacroTests {
 			Body Macros aren't compatible with computed properties yet.
 
 			See: https://github.com/swiftlang/swift/issues/75715
-			"""
-		)
+			""",
+		),
 	)
 	func computedVarWithNonLiteralSeparator() {
 		assertMacro {

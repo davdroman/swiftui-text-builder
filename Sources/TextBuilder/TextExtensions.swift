@@ -72,7 +72,7 @@ extension Text {
 	public init(
 		separator: Text? = nil,
 		default: Text = Text(verbatim: ""),
-		@ArrayBuilder<Text> content: () -> [Text]
+		@ArrayBuilder<Text> content: () -> [Text],
 	) {
 		self = content().joined(separator: separator) ?? `default`
 	}
@@ -87,7 +87,7 @@ extension Text {
 	public init(
 		separator: some StringProtocol,
 		default: Text = Text(verbatim: ""),
-		@ArrayBuilder<Text> content: () -> [Text]
+		@ArrayBuilder<Text> content: () -> [Text],
 	) {
 		self.init(separator: Text(separator), content: content)
 	}
