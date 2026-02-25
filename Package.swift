@@ -34,7 +34,6 @@ let package = Package(
 		.testTarget(name: "TextBuilderMacroTests", dependencies: [
 			"TextBuilderMacro",
 			.product(name: "MacroTesting", package: "swift-macro-testing"),
-			.product(name: "SwiftCompilerPlugin", package: "swift-syntax"),
 		]),
 	]
 )
@@ -51,5 +50,6 @@ for target in package.targets {
 	target.swiftSettings? += [
 		.enableUpcomingFeature("ExistentialAny"),
 		.enableUpcomingFeature("InternalImportsByDefault"),
+		.enableUpcomingFeature("MemberImportVisibility"),
 	]
 }

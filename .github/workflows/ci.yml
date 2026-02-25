@@ -47,11 +47,11 @@ jobs:
           - watchOS
         swift:
           - "6.1"
-          - "6.2"
+          - "6.3"
         include:
           - swift: "6.1"
             runner: macos-15
-          - swift: "6.2"
+          - swift: "6.3"
             runner: macos-26
     steps:
       - name: Git Checkout
@@ -63,15 +63,6 @@ jobs:
           swift: ~${{ matrix.swift }}
           action: none
           verbosity: xcbeautify
-
-      - name: Disable SwiftSyntax Prebuilts
-        run: |
-          defaults write com.apple.dt.Xcode IDEPackageEnablePrebuilts -bool NO
-
-          # nuke cache to ensure it takes effect
-          rm -rf ~/Library/Developer/Xcode/DerivedData
-          rm -rf ~/Library/Developer/Xcode/SourcePackages
-          rm -rf ~/Library/Caches/org.swift.swiftpm
 
       - if: ${{ matrix.platform != 'macOS' && matrix.platform != 'mac-catalyst' }}
         name: Initialize Simulator Service
