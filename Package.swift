@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.1
 
 import CompilerPluginSupport
 import PackageDescription
@@ -34,11 +34,12 @@ let package = Package(
 		.testTarget(name: "TextBuilderMacroTests", dependencies: [
 			"TextBuilderMacro",
 			.product(name: "MacroTesting", package: "swift-macro-testing"),
+			.product(name: "SwiftCompilerPlugin", package: "swift-syntax"),
 		]),
 	]
 )
 
-package.dependencies = [
+package.dependencies += [
 	.package(url: "https://github.com/davdroman/swift-builders", from: "0.10.0"),
 	.package(url: "https://github.com/pointfreeco/swift-custom-dump", from: "1.0.0"),
 	.package(url: "https://github.com/pointfreeco/swift-macro-testing", from: "0.6.0"),
