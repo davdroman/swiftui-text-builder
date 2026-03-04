@@ -67,7 +67,9 @@ jobs:
       - name: Disable SwiftSyntax Prebuilts
         # TODO: Drop or update Swift version constraint as prebuilts become available
         if: ${{ matrix.swift == '6.3' }}
-        run: defaults write com.apple.dt.Xcode IDEPackageEnablePrebuilts -bool NO
+        run: |
+          defaults write com.apple.dt.Xcode IDEPackageEnablePrebuilts -bool NO
+          rm -rf ~/Library/Developer/Xcode/DerivedData/*/SourcePackages/prebuilts
 
       - if: ${{ matrix.platform != 'macOS' && matrix.platform != 'mac-catalyst' }}
         name: Initialize Simulator Service
