@@ -69,7 +69,9 @@ jobs:
         if: ${{ matrix.swift == '6.3' }}
         run: |
           defaults write com.apple.dt.Xcode IDEPackageEnablePrebuilts -bool NO
-          rm -rf ~/Library/Developer/Xcode/DerivedData/*/SourcePackages/prebuilts
+          rm -rf ~/Library/Developer/Xcode/DerivedData
+          rm -rf ~/Library/Developer/Xcode/SourcePackages
+          rm -rf ~/Library/Caches/org.swift.swiftpm
 
       - if: ${{ matrix.platform != 'macOS' && matrix.platform != 'mac-catalyst' }}
         name: Initialize Simulator Service
