@@ -65,13 +65,9 @@ jobs:
           verbosity: xcbeautify
 
       - name: Disable SwiftSyntax Prebuilts
-        run: |
-          defaults write com.apple.dt.Xcode IDEPackageEnablePrebuilts -bool NO
-
-          # nuke cache to ensure it takes effect
-          rm -rf ~/Library/Developer/Xcode/DerivedData
-          rm -rf ~/Library/Developer/Xcode/SourcePackages
-          rm -rf ~/Library/Caches/org.swift.swiftpm
+        # TODO: Drop or update Swift version constraint as prebuilts become available
+        if: ${{ matrix.swift == '6.3' }}
+        run: defaults write com.apple.dt.Xcode IDEPackageEnablePrebuilts -bool NO
 
       - if: ${{ matrix.platform != 'macOS' && matrix.platform != 'mac-catalyst' }}
         name: Initialize Simulator Service
