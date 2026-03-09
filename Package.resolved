@@ -1,13 +1,13 @@
 {
-  "originHash" : "10950e5aef9c8197696f67b08d1f930451e93a928c3c5518127e0dab4c75132b",
+  "originHash" : "e1f242c6c0bb07873af7e7d4aaeec383a7ec69dabe864cdafffd3872566954c0",
   "pins" : [
     {
       "identity" : "swift-builders",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/davdroman/swift-builders",
       "state" : {
-        "revision" : "72cfbfffd6a56883a3c590a87f88a71c819d6de3",
-        "version" : "0.10.0"
+        "revision" : "a9954e796bcc5e03b1f1c43910dd7642dfc981fc",
+        "version" : "0.11.0"
       }
     },
     {
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-custom-dump",
       "state" : {
-        "revision" : "2a2a938798236b8fa0bc57c453ee9de9f9ec3ab0",
-        "version" : "1.4.1"
+        "revision" : "06c57924455064182d6b217f06ebc05d00cb2990",
+        "version" : "1.5.0"
       }
     },
     {
