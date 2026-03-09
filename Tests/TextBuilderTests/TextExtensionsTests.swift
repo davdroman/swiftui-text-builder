@@ -11,7 +11,7 @@ import TextBuilder
 			Text("Lorem").underline().foregroundColor(.blue) +
 				Text("ipsum dolor") +
 				Text("sit").bold() +
-				Text("amet, consectetur")
+				Text("amet, consectetur"),
 		)
 	}
 
@@ -24,7 +24,7 @@ import TextBuilder
 				Text(" ") +
 				Text("sit").bold() +
 				Text(" ") +
-				Text("amet, consectetur")
+				Text("amet, consectetur"),
 		)
 	}
 
@@ -37,7 +37,7 @@ import TextBuilder
 				Text(" ** ").italic().foregroundColor(.green) +
 				Text("sit").bold() +
 				Text(" ** ").italic().foregroundColor(.green) +
-				Text("amet, consectetur")
+				Text("amet, consectetur"),
 		)
 	}
 
@@ -47,14 +47,14 @@ import TextBuilder
 			Text("Lorem").underline().foregroundColor(.blue) +
 				Text("ipsum dolor") +
 				Text("sit").bold() +
-				Text("amet, consectetur")
+				Text("amet, consectetur"),
 		)
 		expectNoDifference(
 			Text(separator: nil, content: textArrayBuilderText),
 			Text("Lorem").underline().foregroundColor(.blue) +
 				Text("ipsum dolor") +
 				Text("sit").bold() +
-				Text("amet, consectetur")
+				Text("amet, consectetur"),
 		)
 	}
 
@@ -67,7 +67,7 @@ import TextBuilder
 				Text("") +
 				Text("sit").bold() +
 				Text("") +
-				Text("amet, consectetur")
+				Text("amet, consectetur"),
 		)
 		expectNoDifference(
 			Text(separator: "", content: textArrayBuilderText),
@@ -77,7 +77,7 @@ import TextBuilder
 				Text(verbatim: "") +
 				Text("sit").bold() +
 				Text(verbatim: "") +
-				Text("amet, consectetur")
+				Text("amet, consectetur"),
 		)
 	}
 
@@ -90,7 +90,7 @@ import TextBuilder
 				Text(" ") +
 				Text("sit").bold() +
 				Text(" ") +
-				Text("amet, consectetur")
+				Text("amet, consectetur"),
 		)
 		expectNoDifference(
 			Text(separator: " ", content: textArrayBuilderText),
@@ -100,7 +100,7 @@ import TextBuilder
 				Text(verbatim: " ") +
 				Text("sit").bold() +
 				Text(verbatim: " ") +
-				Text("amet, consectetur")
+				Text("amet, consectetur"),
 		)
 	}
 
@@ -113,7 +113,7 @@ import TextBuilder
 				Text("\n") +
 				Text("sit").bold() +
 				Text("\n") +
-				Text("amet, consectetur")
+				Text("amet, consectetur"),
 		)
 		expectNoDifference(
 			Text(separator: "\n", content: textArrayBuilderText),
@@ -123,7 +123,7 @@ import TextBuilder
 				Text(verbatim: "\n") +
 				Text("sit").bold() +
 				Text(verbatim: "\n") +
-				Text("amet, consectetur")
+				Text("amet, consectetur"),
 		)
 	}
 }

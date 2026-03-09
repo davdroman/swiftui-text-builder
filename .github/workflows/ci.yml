@@ -34,7 +34,7 @@ jobs:
   apple:
     if: github.event_name != 'pull_request' || !contains(github.event.pull_request.title, '[skip ci]')
     name: ${{ matrix.platform }} (Swift ${{ matrix.swift }})
-    runs-on: macos-15
+    runs-on: ${{ matrix.runner }}
     strategy:
       fail-fast: false
       matrix:
@@ -43,12 +43,16 @@ jobs:
           - mac-catalyst
           - macOS
           - tvOS
-          - watchOS
           - visionOS
+          - watchOS
         swift:
-          - "6.0"
           - "6.1"
-          - "6.2"
+          - "6.3"
+        include:
+          - swift: "6.1"
+            runner: macos-15
+          - swift: "6.3"
+            runner: macos-26
     steps:
       - name: Git Checkout
         uses: actions/checkout@v5
@@ -61,10 +65,10 @@ jobs:
           verbosity: xcbeautify
 
       - name: Disable SwiftSyntax Prebuilts
+        # TODO: Drop or update Swift version constraint as prebuilts become available
+        if: ${{ matrix.swift == '6.3' }}
         run: |
           defaults write com.apple.dt.Xcode IDEPackageEnablePrebuilts -bool NO
-
-          # nuke cache to ensure it takes effect
           rm -rf ~/Library/Developer/Xcode/DerivedData
           rm -rf ~/Library/Developer/Xcode/SourcePackages
           rm -rf ~/Library/Caches/org.swift.swiftpm
@@ -101,5 +105,5 @@ jobs:
         uses: davdroman/swift-macro-compatibility-check@from-version
         with:
           run-tests: false
-          from-version: "600.0.0"
+          from-version: "601.0.0"
           major-versions-only: true
