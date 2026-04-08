@@ -105,5 +105,4 @@ jobs:
         uses: davdroman/swift-syntax-compatibility-check@v1
         with:
           run-tests: false
-          from-version: "601.0.0"
           major-versions-only: true
