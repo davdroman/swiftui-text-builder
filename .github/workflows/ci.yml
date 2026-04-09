@@ -101,9 +101,8 @@ jobs:
       - name: Git Checkout
         uses: actions/checkout@v5
 
-      - name: Run Swift Syntax Compatibility Check
-        uses: davdroman/swift-macro-compatibility-check@main
+      - name: Check Swift Syntax Compatibility
+        uses: davdroman/swift-syntax-compatibility-check@v1
         with:
           run-tests: false
-          from-version: "601.0.0"
           major-versions-only: true
