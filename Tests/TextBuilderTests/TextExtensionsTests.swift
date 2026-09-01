@@ -5,7 +5,7 @@ import Testing
 import TextBuilder
 
 @Suite struct TextExtensionsTests {
-	@Test func joined_noSeparator() {
+	@Test func `joined without separator`() {
 		expectNoDifference(
 			textArray.joined(),
 			Text("Lorem").underline().foregroundColor(.blue) +
@@ -15,7 +15,7 @@ import TextBuilder
 		)
 	}
 
-	@Test func joined_spaceSeparator() {
+	@Test func `joined with space separator`() {
 		expectNoDifference(
 			textArray.joined(separator: Text(" ")),
 			Text("Lorem").underline().foregroundColor(.blue) +
@@ -28,7 +28,7 @@ import TextBuilder
 		)
 	}
 
-	@Test func joined_formattedSeparator() {
+	@Test func `joined with formatted separator`() {
 		expectNoDifference(
 			textArray.joined(separator: Text(" ** ").italic().foregroundColor(.green)),
 			Text("Lorem").underline().foregroundColor(.blue) +
@@ -41,7 +41,7 @@ import TextBuilder
 		)
 	}
 
-	@Test func init_noSeparator() {
+	@Test func `init without separator`() {
 		expectNoDifference(
 			Text(content: textArrayBuilderText),
 			Text("Lorem").underline().foregroundColor(.blue) +
@@ -58,7 +58,7 @@ import TextBuilder
 		)
 	}
 
-	@Test func init_blankSeparator() {
+	@Test func `init with blank separator`() {
 		expectNoDifference(
 			Text(separator: Text(""), content: textArrayBuilderText),
 			Text("Lorem").underline().foregroundColor(.blue) +
@@ -81,7 +81,7 @@ import TextBuilder
 		)
 	}
 
-	@Test func init_spaceSeparator() {
+	@Test func `init with space separator`() {
 		expectNoDifference(
 			Text(separator: Text(" "), content: textArrayBuilderText),
 			Text("Lorem").underline().foregroundColor(.blue) +
@@ -104,7 +104,7 @@ import TextBuilder
 		)
 	}
 
-	@Test func init_newlineSeparator() {
+	@Test func `init with newline separator`() {
 		expectNoDifference(
 			Text(separator: Text("\n"), content: textArrayBuilderText),
 			Text("Lorem").underline().foregroundColor(.blue) +

@@ -22,7 +22,7 @@ struct TextBuilderMacroTests {
 			""",
 		),
 	)
-	func computedVarWithoutImplementation() {
+	func `computed property without implementation`() {
 		assertMacro {
 			"""
 			@TextBuilder
@@ -47,7 +47,7 @@ struct TextBuilderMacroTests {
 			""",
 		),
 	)
-	func computedVarWithoutSeparator() {
+	func `computed property without separator`() {
 		assertMacro {
 			"""
 			@TextBuilder
@@ -103,7 +103,7 @@ struct TextBuilderMacroTests {
 			""",
 		),
 	)
-	func computedVarWithLiteralSeparator() {
+	func `computed property with literal separator`() {
 		assertMacro {
 			"""
 			@TextBuilder(separator: " ")
@@ -159,7 +159,7 @@ struct TextBuilderMacroTests {
 			""",
 		),
 	)
-	func computedVarWithNonLiteralSeparator() {
+	func `computed property with non-literal separator`() {
 		assertMacro {
 			"""
 			let separator = " "
@@ -208,7 +208,7 @@ struct TextBuilderMacroTests {
 		}
 	}
 
-	@Test func functionWithoutImplementation() {
+	@Test func `function without implementation`() {
 		assertMacro {
 			"""
 			@TextBuilder
@@ -224,7 +224,7 @@ struct TextBuilderMacroTests {
 		}
 	}
 
-	@Test func functionWithoutSeparator() {
+	@Test func `function without separator`() {
 		assertMacro {
 			"""
 			@TextBuilder
@@ -271,7 +271,7 @@ struct TextBuilderMacroTests {
 		}
 	}
 
-	@Test func functionWithLiteralSeparator() {
+	@Test func `function with literal separator`() {
 		assertMacro {
 			"""
 			@TextBuilder(separator: " ")
@@ -318,7 +318,7 @@ struct TextBuilderMacroTests {
 		}
 	}
 
-	@Test func functionWithNonLiteralSeparator() {
+	@Test func `function with non-literal separator`() {
 		assertMacro {
 			"""
 			let separator = " "
