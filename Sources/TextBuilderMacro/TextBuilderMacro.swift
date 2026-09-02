@@ -8,7 +8,10 @@ struct TextBuilderMacro: BodyMacro {
 		providingBodyFor declaration: some DeclSyntaxProtocol & WithOptionalCodeBlockSyntax,
 		in context: some MacroExpansionContext,
 	) throws -> [CodeBlockItemSyntax] {
-		let separatorExpr: ExprSyntax = if let args = node.arguments, case let .argumentList(list) = args, let first = list.first {
+		let separatorExpr: ExprSyntax = if
+			let args = node.arguments, case let .argumentList(list) = args,
+			let first = list.first
+		{
 			first.expression
 		} else {
 			ExprSyntax(NilLiteralExprSyntax())
