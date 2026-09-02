@@ -18,7 +18,7 @@ struct TextBuilderTests {
 		)
 	}
 
-	@Test func defaultTextBuilder() {
+	@Test func `default text builder`() {
 		@TextBuilder
 		func sut() -> Text {
 			Text("Lorem").underline().foregroundColor(.blue)
@@ -36,7 +36,7 @@ struct TextBuilderTests {
 		)
 	}
 
-	@Test func spacedTextBuilder() {
+	@Test func `spaced text builder`() {
 		@TextBuilder(separator: " ")
 		func sut() -> Text {
 			Text("Lorem").underline().foregroundColor(.blue)
@@ -57,7 +57,7 @@ struct TextBuilderTests {
 		)
 	}
 
-	@Test func multilineTextBuilder() {
+	@Test func `multiline text builder`() {
 		@TextBuilder(separator: "\n")
 		func sut() -> Text {
 			Text("Lorem").underline().foregroundColor(.blue)
@@ -78,7 +78,7 @@ struct TextBuilderTests {
 		)
 	}
 
-	@Test func customTextBuilder() {
+	@Test func `custom text builder`() {
 		@TextBuilder(separator: " 👏 ")
 		func sut() -> Text {
 			Text("Lorem").underline().foregroundColor(.blue)
@@ -99,7 +99,7 @@ struct TextBuilderTests {
 		)
 	}
 
-	@Test func complexTextBuilder() {
+	@Test func `complex text builder`() {
 		@TextBuilder(separator: " ")
 		func sut() -> Text {
 			"Lorem".text.underline().foregroundColor(.blue)
