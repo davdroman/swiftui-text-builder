@@ -129,3 +129,12 @@ This is useful if you simply want to insert some rich text into a view body with
 The `@TextBuilder` macro currently cannot be applied to computed properties due to Swift limitations. Use functions instead.
 
 See [Swift Issue #75715](https://github.com/swiftlang/swift/issues/75715) for updates on computed property support.
+
+## Development
+
+Install [Mise](https://mise.jdx.dev/), then install the project tools and Git hooks:
+
+```sh
+mise install
+mise exec -- hk install --mise
+```
