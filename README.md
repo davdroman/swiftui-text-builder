@@ -16,7 +16,7 @@ TextBuilder leverages the power of Swift [Macros](https://docs.swift.org/swift-b
 Add `TextBuilder` to your Swift Package Manager dependencies:
 
 ```swift
-.package(url: "https://github.com/davdroman/swiftui-text-builder", from: "4.0.0"),
+.package(url: "https://github.com/davdroman/swiftui-text-builder", from: "5.0.0"),
 ```
 
 Then, add the dependency to your desired target:
@@ -59,9 +59,6 @@ func loremIpsum() -> Text {
     Text("ipsum dolor")
 }
 ```
-
-> [!NOTE]
-> Computed properties and getters require Swift 6.4 or later, with swift-syntax 604 or later. On earlier versions, apply `@TextBuilder` to functions instead.
 
 ### With Separators
 

@@ -135,7 +135,6 @@ struct TextBuilderTests {
 		)
 	}
 
-	#if compiler(>=6.4)
 	@Test func `computed property text builder`() {
 		@TextBuilder(separator: " ")
 		var sut: Text {
@@ -173,5 +172,4 @@ struct TextBuilderTests {
 				Text(verbatim: "sit").bold(),
 		)
 	}
-	#endif
 }

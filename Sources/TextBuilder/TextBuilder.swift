@@ -27,8 +27,6 @@ public import SwiftUI
 /// - The expansion relies on the ``Text.init(separator:default:content:)-(Text?,_,_)`` builder-style API that is
 ///   included as part of this package, which performs concatenation and separator insertion.
 /// - Apply `@TextBuilder` to computed properties, getters, or functions that return `Text`.
-/// - Computed properties and getters require Swift 6.4 or later. On earlier versions, apply `@TextBuilder` to
-///   functions instead.
 @attached(body)
 public macro TextBuilder(separator: Text? = nil) = #externalMacro(
 	module: "TextBuilderMacro",

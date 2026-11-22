@@ -13,7 +13,6 @@ import Testing
 	),
 )
 struct TextBuilderMacroTests {
-	#if canImport(SwiftSyntax604)
 	@Test func `computed property without separator`() {
 		assertMacro {
 			"""
@@ -181,7 +180,6 @@ struct TextBuilderMacroTests {
 			"""
 		}
 	}
-	#endif
 
 	@Test func `function without implementation`() {
 		assertMacro {
