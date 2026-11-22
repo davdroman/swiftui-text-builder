@@ -33,7 +33,7 @@ let package = Package(
 		]),
 		.testTarget(name: "TextBuilderMacroTests", dependencies: [
 			"TextBuilderMacro",
-			.product(name: "MacroTesting", package: "swift-macro-testing"),
+			.product(name: "MacroTesting", package: "swift-macro-testing", condition: .when(platforms: [.macOS])),
 		]),
 	],
 )

@@ -1,4 +1,4 @@
-#if canImport(TextBuilderMacro)
+#if canImport(TextBuilderMacro) && canImport(MacroTesting)
 import MacroTesting
 import SnapshotTesting
 import SwiftSyntax
