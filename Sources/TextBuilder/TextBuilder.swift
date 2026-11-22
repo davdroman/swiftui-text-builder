@@ -6,8 +6,9 @@ public import SwiftUI
 ///
 /// ## Behavior
 /// - Empty bodies produce `Text(verbatim: "")`.
-/// - You can mix `Text` values and string-like values (e.g., string literals, `String`, results of `String(i)`, etc.).
-///   These string values are treated as verbatim text.
+/// - You can mix `Text` values and string-like values. String literals, including interpolated ones, are localized
+///   like `Text("…")`. String values (e.g., a `String` variable or the result of `String(i)`) are treated as verbatim
+///   text.
 /// - Control flow is supported: `if`/`else`, `if let`, and `for` loops can conditionally emit or repeat parts.
 /// - Modifiers applied to individual segments (e.g., `.bold()`, `.underline()`, `.foregroundColor(_:)`) are preserved
 ///   for those segments.

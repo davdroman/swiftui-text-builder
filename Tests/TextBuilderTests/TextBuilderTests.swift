@@ -135,6 +135,53 @@ struct TextBuilderTests {
 		)
 	}
 
+	@Test func `string literals are localized`() {
+		@TextBuilder(separator: " ")
+		var sut: Text {
+			"Hello"
+			"world"
+		}
+
+		expectNoDifference(
+			sut,
+			Text("Hello") +
+				Text(verbatim: " ") +
+				Text("world"),
+		)
+	}
+
+	@Test func `string interpolations are localized`() {
+		let count = 3
+
+		@TextBuilder
+		var sut: Text {
+			"\(count) items"
+		}
+
+		// Localized interpolations don't compare equal, so compare their dumps instead.
+		expectNoDifference(
+			String(customDumping: sut),
+			String(customDumping: Text("\(count) items")),
+		)
+	}
+
+	@Test func `string values are verbatim`() {
+		let greeting = "Hello"
+
+		@TextBuilder(separator: " ")
+		var sut: Text {
+			greeting
+			greeting.dropLast()
+		}
+
+		expectNoDifference(
+			sut,
+			Text(verbatim: "Hello") +
+				Text(verbatim: " ") +
+				Text(verbatim: "Hell"),
+		)
+	}
+
 	@Test func `computed property text builder`() {
 		@TextBuilder(separator: " ")
 		var sut: Text {

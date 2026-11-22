@@ -88,14 +88,15 @@ var multilineText: Text {
 
 ### String Support ✨
 
-TextBuilder accepts `String` types directly as verbatim text:
+TextBuilder accepts strings directly. String literals are localized, just like `Text("…")`, and string values are verbatim, just like `Text(someString)`:
 
 ```swift
 @TextBuilder(separator: " ")
 var mixedText: Text {
-    "Hello"  // String literal becomes verbatim Text
-    Text(verbatim: "world").bold()  // Use Text for chaining modifiers
-    String(2025)  // Any StringProtocol works
+    "Hello"  // String literal becomes localized Text
+    "\(count) items"  // So does an interpolated literal
+    Text("world").bold()  // Use Text for chaining modifiers
+    String(2025)  // String values become verbatim Text
 }
 ```
 
@@ -131,9 +132,9 @@ If you prefer not to use macros, you can use the underlying `Text` initializer d
 ```swift
 var body: some View {
     Text(separator: " 👏 ") {
-        Text(verbatim: "Lorem").underline().foregroundColor(.blue)
+        Text("Lorem").underline().foregroundColor(.blue)
         "ipsum dolor"
-        Text(verbatim: "sit").bold()
+        Text("sit").bold()
         "amet, consectetur"
     }
 }

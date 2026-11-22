@@ -31,6 +31,14 @@ extension Sequence<Text> {
 }
 
 extension ArrayBuilder<Text> {
+	/// Turns a string literal into localized text, as `Text(_:tableName:bundle:comment:)` does.
+	@inlinable
+	public static func buildExpression(_ key: LocalizedStringKey) -> [Text] {
+		[Text(key)]
+	}
+
+	/// Turns a string value into verbatim text, as `Text(_:)` does for any `StringProtocol`.
+	@_disfavoredOverload
 	@inlinable
 	public static func buildExpression(_ expression: some StringProtocol) -> [Text] {
 		[Text(expression)]
