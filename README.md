@@ -71,13 +71,13 @@ func multilineText() -> Text {
 
 ### String Support ✨
 
-TextBuilder accepts `String` types directly and provides a convenient `.text` computed property:
+TextBuilder accepts `String` types directly as verbatim text:
 
 ```swift
 @TextBuilder(separator: " ")
 func mixedText() -> Text {
     "Hello"  // String literal becomes verbatim Text
-    "world".text.bold()  // Use .text for chaining modifiers
+    Text(verbatim: "world").bold()  // Use Text for chaining modifiers
     String(2025)  // Any StringProtocol works
 }
 ```
@@ -98,7 +98,7 @@ func conditionalText(showDetails: Bool) -> Text {
     }
 
     if let name = userName {
-        name.text.italic()
+        Text(name).italic()
     }
 
     for i in 1...3 {
@@ -114,9 +114,9 @@ If you prefer not to use macros, you can use the underlying `Text` initializer d
 ```swift
 var body: some View {
     Text(separator: " 👏 ") {
-        "Lorem".text.underline().foregroundColor(.blue)
+        Text(verbatim: "Lorem").underline().foregroundColor(.blue)
         "ipsum dolor"
-        "sit".text.bold()
+        Text(verbatim: "sit").bold()
         "amet, consectetur"
     }
 }

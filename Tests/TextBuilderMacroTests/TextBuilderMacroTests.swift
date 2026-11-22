@@ -52,14 +52,14 @@ struct TextBuilderMacroTests {
 			"""
 			@TextBuilder
 			var text: Text {
-				"Lorem".text.underline().foregroundColor(.blue)
+				Text(verbatim: "Lorem").underline().foregroundColor(.blue)
 				if false {
 					"ipsum dolor"
 				}
 				if false {
 					"sit"
 				} else {
-					"sit".text.bold()
+					Text(verbatim: "sit").bold()
 				}
 				if let string = "amet, consectetur" as String? {
 					string
@@ -73,14 +73,14 @@ struct TextBuilderMacroTests {
 			"""
 			var text: Text {
 				Text(separator: nil) {
-					"Lorem".text.underline().foregroundColor(.blue)
+					Text(verbatim: "Lorem").underline().foregroundColor(.blue)
 					if false {
 						"ipsum dolor"
 					}
 					if false {
 						"sit"
 					} else {
-						"sit".text.bold()
+						Text(verbatim: "sit").bold()
 					}
 					if let string = "amet, consectetur" as String? {
 						string
@@ -108,14 +108,14 @@ struct TextBuilderMacroTests {
 			"""
 			@TextBuilder(separator: " ")
 			var text: Text {
-				"Lorem".text.underline().foregroundColor(.blue)
+				Text(verbatim: "Lorem").underline().foregroundColor(.blue)
 				if false {
 					"ipsum dolor"
 				}
 				if false {
 					"sit"
 				} else {
-					"sit".text.bold()
+					Text(verbatim: "sit").bold()
 				}
 				if let string = "amet, consectetur" as String? {
 					string
@@ -129,14 +129,14 @@ struct TextBuilderMacroTests {
 			"""
 			var text: Text {
 				Text(separator: " ") {
-					"Lorem".text.underline().foregroundColor(.blue)
+					Text(verbatim: "Lorem").underline().foregroundColor(.blue)
 					if false {
 						"ipsum dolor"
 					}
 					if false {
 						"sit"
 					} else {
-						"sit".text.bold()
+						Text(verbatim: "sit").bold()
 					}
 					if let string = "amet, consectetur" as String? {
 						string
@@ -165,14 +165,14 @@ struct TextBuilderMacroTests {
 			let separator = " "
 			@TextBuilder(separator: separator)
 			var text: Text {
-				"Lorem".text.underline().foregroundColor(.blue)
+				Text(verbatim: "Lorem").underline().foregroundColor(.blue)
 				if false {
 					"ipsum dolor"
 				}
 				if false {
 					"sit"
 				} else {
-					"sit".text.bold()
+					Text(verbatim: "sit").bold()
 				}
 				if let string = "amet, consectetur" as String? {
 					string
@@ -187,14 +187,14 @@ struct TextBuilderMacroTests {
 			let separator = " "
 			var text: Text {
 				Text(separator: separator) {
-					"Lorem".text.underline().foregroundColor(.blue)
+					Text(verbatim: "Lorem").underline().foregroundColor(.blue)
 					if false {
 						"ipsum dolor"
 					}
 					if false {
 						"sit"
 					} else {
-						"sit".text.bold()
+						Text(verbatim: "sit").bold()
 					}
 					if let string = "amet, consectetur" as String? {
 						string
@@ -229,14 +229,14 @@ struct TextBuilderMacroTests {
 			"""
 			@TextBuilder
 			func text() -> Text {
-				"Lorem".text.underline().foregroundColor(.blue)
+				Text(verbatim: "Lorem").underline().foregroundColor(.blue)
 				if false {
 					"ipsum dolor"
 				}
 				if false {
 					"sit"
 				} else {
-					"sit".text.bold()
+					Text(verbatim: "sit").bold()
 				}
 				if let string = "amet, consectetur" as String? {
 					string
@@ -250,14 +250,14 @@ struct TextBuilderMacroTests {
 			"""
 			func text() -> Text {
 				Text(separator: nil) {
-					"Lorem".text.underline().foregroundColor(.blue)
+					Text(verbatim: "Lorem").underline().foregroundColor(.blue)
 					if false {
 						"ipsum dolor"
 					}
 					if false {
 						"sit"
 					} else {
-						"sit".text.bold()
+						Text(verbatim: "sit").bold()
 					}
 					if let string = "amet, consectetur" as String? {
 						string
@@ -276,14 +276,14 @@ struct TextBuilderMacroTests {
 			"""
 			@TextBuilder(separator: " ")
 			func text() -> Text {
-				"Lorem".text.underline().foregroundColor(.blue)
+				Text(verbatim: "Lorem").underline().foregroundColor(.blue)
 				if false {
 					"ipsum dolor"
 				}
 				if false {
 					"sit"
 				} else {
-					"sit".text.bold()
+					Text(verbatim: "sit").bold()
 				}
 				if let string = "amet, consectetur" as String? {
 					string
@@ -297,14 +297,14 @@ struct TextBuilderMacroTests {
 			"""
 			func text() -> Text {
 				Text(separator: " ") {
-					"Lorem".text.underline().foregroundColor(.blue)
+					Text(verbatim: "Lorem").underline().foregroundColor(.blue)
 					if false {
 						"ipsum dolor"
 					}
 					if false {
 						"sit"
 					} else {
-						"sit".text.bold()
+						Text(verbatim: "sit").bold()
 					}
 					if let string = "amet, consectetur" as String? {
 						string
@@ -324,14 +324,14 @@ struct TextBuilderMacroTests {
 			let separator = " "
 			@TextBuilder(separator: separator)
 			func text() -> Text {
-				"Lorem".text.underline().foregroundColor(.blue)
+				Text(verbatim: "Lorem").underline().foregroundColor(.blue)
 				if false {
 					"ipsum dolor"
 				}
 				if false {
 					"sit"
 				} else {
-					"sit".text.bold()
+					Text(verbatim: "sit").bold()
 				}
 				if let string = "amet, consectetur" as String? {
 					string
@@ -346,14 +346,14 @@ struct TextBuilderMacroTests {
 			let separator = " "
 			func text() -> Text {
 				Text(separator: separator) {
-					"Lorem".text.underline().foregroundColor(.blue)
+					Text(verbatim: "Lorem").underline().foregroundColor(.blue)
 					if false {
 						"ipsum dolor"
 					}
 					if false {
 						"sit"
 					} else {
-						"sit".text.bold()
+						Text(verbatim: "sit").bold()
 					}
 					if let string = "amet, consectetur" as String? {
 						string

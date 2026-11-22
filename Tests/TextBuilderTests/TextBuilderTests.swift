@@ -102,14 +102,14 @@ struct TextBuilderTests {
 	@Test func `complex text builder`() {
 		@TextBuilder(separator: " ")
 		func sut() -> Text {
-			"Lorem".text.underline().foregroundColor(.blue)
+			Text(verbatim: "Lorem").underline().foregroundColor(.blue)
 			if false {
 				"ipsum dolor"
 			}
 			if false {
 				"sit"
 			} else {
-				"sit".text.bold()
+				Text(verbatim: "sit").bold()
 			}
 			if let string = "amet, consectetur" as String? {
 				string
