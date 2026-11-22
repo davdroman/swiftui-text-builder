@@ -1,17 +1,6 @@
 public import Builders
 public import SwiftUI
 
-extension StringProtocol {
-	/// Turns any `StringProtocol` (like `String` or `Substring`) into a SwiftUI `Text`.
-	///
-	/// This is equivalent to `Text(self)` and produces verbatim text.
-	@available(*, deprecated, message: "Use 'Text(verbatim:)' instead.")
-	@inlinable
-	public var text: Text {
-		Text(self)
-	}
-}
-
 extension Sequence<Text> {
 	/// Returns a new `Text` by concatenating the elements of the sequence.
 	///
