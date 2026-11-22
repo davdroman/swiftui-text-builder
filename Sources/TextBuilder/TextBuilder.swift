@@ -16,7 +16,7 @@ public import SwiftUI
 /// ## Example
 /// ```swift
 /// @TextBuilder(separator: " ")
-/// func message() -> Text {
+/// var message: Text {
 ///     Text("Hello").bold()
 ///     "world, the year is"
 ///     String(2025)
@@ -26,9 +26,9 @@ public import SwiftUI
 /// ## Notes
 /// - The expansion relies on the ``Text.init(separator:default:content:)-(Text?,_,_)`` builder-style API that is
 ///   included as part of this package, which performs concatenation and separator insertion.
-/// - Apply `@TextBuilder` to functions that return `Text`.
-/// - Applying `@TextBuilder` to computed properties that return `Text` is currently unsupported due to limitations in
-///   Swift. See https://github.com/swiftlang/swift/issues/75715 for details.
+/// - Apply `@TextBuilder` to computed properties, getters, or functions that return `Text`.
+/// - Computed properties and getters require Swift 6.4 or later. On earlier versions, apply `@TextBuilder` to
+///   functions instead.
 @attached(body)
 public macro TextBuilder(separator: Text? = nil) = #externalMacro(
 	module: "TextBuilderMacro",

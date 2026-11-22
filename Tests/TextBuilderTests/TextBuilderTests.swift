@@ -134,4 +134,44 @@ struct TextBuilderTests {
 				Text(verbatim: "3"),
 		)
 	}
+
+	#if compiler(>=6.4)
+	@Test func `computed property text builder`() {
+		@TextBuilder(separator: " ")
+		var sut: Text {
+			Text(verbatim: "Lorem").underline().foregroundColor(.blue)
+			if false {
+				"ipsum dolor"
+			}
+			Text(verbatim: "sit").bold()
+		}
+
+		expectNoDifference(
+			sut,
+			Text(verbatim: "Lorem").underline().foregroundColor(.blue) +
+				Text(verbatim: " ") +
+				Text(verbatim: "sit").bold(),
+		)
+	}
+
+	@Test func `getter text builder`() {
+		var sut: Text {
+			@TextBuilder(separator: " ")
+			get {
+				Text(verbatim: "Lorem").underline().foregroundColor(.blue)
+				if false {
+					"ipsum dolor"
+				}
+				Text(verbatim: "sit").bold()
+			}
+		}
+
+		expectNoDifference(
+			sut,
+			Text(verbatim: "Lorem").underline().foregroundColor(.blue) +
+				Text(verbatim: " ") +
+				Text(verbatim: "sit").bold(),
+		)
+	}
+	#endif
 }

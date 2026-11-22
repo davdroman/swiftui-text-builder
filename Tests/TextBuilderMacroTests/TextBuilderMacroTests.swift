@@ -13,41 +13,8 @@ import Testing
 	),
 )
 struct TextBuilderMacroTests {
-	@Test(
-		.disabled(
-			"""
-			Body Macros aren't compatible with computed properties yet.
-
-			See: https://github.com/swiftlang/swift/issues/75715
-			""",
-		),
-	)
-	func `computed property without implementation`() {
-		assertMacro {
-			"""
-			@TextBuilder
-			var text: Text
-			"""
-		} expansion: {
-			"""
-			var text: Text {
-				Text(separator: nil) {
-				}
-			}
-			"""
-		}
-	}
-
-	@Test(
-		.disabled(
-			"""
-			Body Macros aren't compatible with computed properties yet.
-
-			See: https://github.com/swiftlang/swift/issues/75715
-			""",
-		),
-	)
-	func `computed property without separator`() {
+	#if canImport(SwiftSyntax604)
+	@Test func `computed property without separator`() {
 		assertMacro {
 			"""
 			@TextBuilder
@@ -94,16 +61,7 @@ struct TextBuilderMacroTests {
 		}
 	}
 
-	@Test(
-		.disabled(
-			"""
-			Body Macros aren't compatible with computed properties yet.
-
-			See: https://github.com/swiftlang/swift/issues/75715
-			""",
-		),
-	)
-	func `computed property with literal separator`() {
+	@Test func `computed property with literal separator`() {
 		assertMacro {
 			"""
 			@TextBuilder(separator: " ")
@@ -150,16 +108,7 @@ struct TextBuilderMacroTests {
 		}
 	}
 
-	@Test(
-		.disabled(
-			"""
-			Body Macros aren't compatible with computed properties yet.
-
-			See: https://github.com/swiftlang/swift/issues/75715
-			""",
-		),
-	)
-	func `computed property with non-literal separator`() {
+	@Test func `computed property with non-literal separator`() {
 		assertMacro {
 			"""
 			let separator = " "
@@ -207,6 +156,32 @@ struct TextBuilderMacroTests {
 			"""
 		}
 	}
+
+	@Test func `getter with separator`() {
+		assertMacro {
+			"""
+			var text: Text {
+				@TextBuilder(separator: " ")
+				get {
+					Text(verbatim: "Lorem").underline().foregroundColor(.blue)
+					"ipsum dolor"
+				}
+			}
+			"""
+		} expansion: {
+			"""
+			var text: Text {
+				get {
+					Text(separator: " ") {
+							Text(verbatim: "Lorem").underline().foregroundColor(.blue)
+							"ipsum dolor"
+					}
+				}
+			}
+			"""
+		}
+	}
+	#endif
 
 	@Test func `function without implementation`() {
 		assertMacro {

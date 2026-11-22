@@ -9,7 +9,7 @@
 
 `Text` composition in SwiftUI can often be cumbersome, especially when there's logic affecting its format and content.
 
-TextBuilder leverages the power of Swift [Macros](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/macros/) to solve this problem. The `@TextBuilder` macro transforms functions into builder-style closures, making text composition intuitive and readable.
+TextBuilder leverages the power of Swift [Macros](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/macros/) to solve this problem. The `@TextBuilder` macro transforms computed properties into builder-style closures, making text composition intuitive and readable.
 
 ## Installation
 
@@ -29,11 +29,11 @@ Then, add the dependency to your desired target:
 
 ### Basic Usage
 
-Apply `@TextBuilder` to functions that return `Text`. The macro will transform the function body into a builder-style closure that concatenates text segments.
+Apply `@TextBuilder` to computed properties that return `Text`. The macro will transform the property body into a builder-style closure that concatenates text segments.
 
 ```swift
 @TextBuilder
-func loremIpsum() -> Text {
+var loremIpsum: Text {
     Text("Lorem").underline().foregroundColor(.blue)
     Text("ipsum dolor")
     Text("sit").bold()
@@ -43,13 +43,33 @@ func loremIpsum() -> Text {
 
 This creates a concatenated `Text` without any separators between segments.
 
+`@TextBuilder` can also be applied to a property's getter or to a function:
+
+```swift
+var loremIpsum: Text {
+    @TextBuilder get {
+        Text("Lorem").underline().foregroundColor(.blue)
+        Text("ipsum dolor")
+    }
+}
+
+@TextBuilder
+func loremIpsum() -> Text {
+    Text("Lorem").underline().foregroundColor(.blue)
+    Text("ipsum dolor")
+}
+```
+
+> [!NOTE]
+> Computed properties and getters require Swift 6.4 or later, with swift-syntax 604 or later. On earlier versions, apply `@TextBuilder` to functions instead.
+
 ### With Separators
 
 You can specify a separator to be inserted between text segments:
 
 ```swift
 @TextBuilder(separator: " ")
-func spacedText() -> Text {
+var spacedText: Text {
     Text("Lorem").underline().foregroundColor(.blue)
     Text("ipsum dolor")
     Text("sit").bold()
@@ -61,7 +81,7 @@ For multiline text:
 
 ```swift
 @TextBuilder(separator: "\n")
-func multilineText() -> Text {
+var multilineText: Text {
     Text("Lorem").underline().foregroundColor(.blue)
     Text("ipsum dolor")
     Text("sit").bold()
@@ -75,7 +95,7 @@ TextBuilder accepts `String` types directly as verbatim text:
 
 ```swift
 @TextBuilder(separator: " ")
-func mixedText() -> Text {
+var mixedText: Text {
     "Hello"  // String literal becomes verbatim Text
     Text(verbatim: "world").bold()  // Use Text for chaining modifiers
     String(2025)  // Any StringProtocol works
@@ -88,7 +108,7 @@ TextBuilder supports Swift's control flow statements:
 
 ```swift
 @TextBuilder(separator: " ")
-func conditionalText(showDetails: Bool) -> Text {
+var conditionalText: Text {
     "Hello"
 
     if showDetails {
@@ -122,13 +142,7 @@ var body: some View {
 }
 ```
 
-This is useful if you simply want to insert some rich text into a view body without defining a separate function.
-
-## Limitations
-
-The `@TextBuilder` macro currently cannot be applied to computed properties due to Swift limitations. Use functions instead.
-
-See [Swift Issue #75715](https://github.com/swiftlang/swift/issues/75715) for updates on computed property support.
+This is useful if you simply want to insert some rich text into a view body without defining a separate property.
 
 ## Development
 
