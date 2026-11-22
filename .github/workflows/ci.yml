@@ -60,7 +60,7 @@ jobs:
         with:
           swift: ~${{ matrix.swift }}
           action: none
-          verbosity: xcbeautify
+          verbosity: verbose
 
       - name: Disable SwiftSyntax Prebuilts
         run: |
@@ -88,7 +88,7 @@ jobs:
           swift: ~${{ matrix.swift }}
           action: test
           scheme: swiftui-text-builder
-          verbosity: xcbeautify
+          verbosity: verbose
 
   check-swift-syntax-compatibility:
     name: Swift Syntax Compatibility Check
