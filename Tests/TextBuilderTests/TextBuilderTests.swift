@@ -257,6 +257,10 @@ struct TextBuilderTests {
 		expectNoDifference(sut, Text(verbatim: "available"))
 	}
 
+	@Test func `expansion is unaffected by shadowing names`() {
+		expectNoDifference(Shadowing().text, Text(verbatim: "Hello"))
+	}
+
 	@Test func `string literals are localized in the given bundle`() {
 		let bundle = Bundle(for: BundleToken.self)
 
@@ -340,3 +344,13 @@ struct TextBuilderTests {
 }
 
 final class BundleToken {}
+
+private struct Shadowing {
+	enum SwiftUI {}
+	struct Text {}
+
+	@TextBuilder
+	var text: SwiftUI::Text {
+		SwiftUI::Text(verbatim: "Hello")
+	}
+}

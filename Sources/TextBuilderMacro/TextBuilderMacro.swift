@@ -28,13 +28,13 @@ struct TextBuilderMacro: BodyMacro {
 		if let bundleArgument {
 			return [
 				"""
-				SwiftUI.Text(separator: \(separatorExpr), bundle: \(bundleArgument)) { \(statements) }
+				SwiftUI::Text(separator: \(separatorExpr), bundle: \(bundleArgument)) { \(statements) }
 				""",
 			]
 		} else {
 			return [
 				"""
-				SwiftUI.Text(separator: \(separatorExpr)) { \(statements) }
+				SwiftUI::Text(separator: \(separatorExpr)) { \(statements) }
 				""",
 			]
 		}
