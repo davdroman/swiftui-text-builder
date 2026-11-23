@@ -38,7 +38,7 @@ struct TextBuilderMacroTests {
 		} expansion: {
 			"""
 			var text: Text {
-				Text(separator: nil) {
+				SwiftUI.Text(separator: nil) {
 					Text(verbatim: "Lorem").underline().foregroundColor(.blue)
 					if false {
 						"ipsum dolor"
@@ -85,7 +85,7 @@ struct TextBuilderMacroTests {
 		} expansion: {
 			"""
 			var text: Text {
-				Text(separator: " ") {
+				SwiftUI.Text(separator: " ") {
 					Text(verbatim: "Lorem").underline().foregroundColor(.blue)
 					if false {
 						"ipsum dolor"
@@ -134,7 +134,7 @@ struct TextBuilderMacroTests {
 			"""
 			let separator = " "
 			var text: Text {
-				Text(separator: separator) {
+				SwiftUI.Text(separator: separator) {
 					Text(verbatim: "Lorem").underline().foregroundColor(.blue)
 					if false {
 						"ipsum dolor"
@@ -171,7 +171,7 @@ struct TextBuilderMacroTests {
 			"""
 			var text: Text {
 				get {
-					Text(separator: " ") {
+					SwiftUI.Text(separator: " ") {
 							Text(verbatim: "Lorem").underline().foregroundColor(.blue)
 							"ipsum dolor"
 					}
@@ -192,7 +192,7 @@ struct TextBuilderMacroTests {
 		} expansion: {
 			"""
 			var text: Text {
-				Text(separator: nil, bundle: .module) {
+				SwiftUI.Text(separator: nil, bundle: .module) {
 					"Lorem"
 				}
 			}
@@ -211,7 +211,7 @@ struct TextBuilderMacroTests {
 		} expansion: {
 			"""
 			var text: Text {
-				Text(separator: " ", bundle: .module) {
+				SwiftUI.Text(separator: " ", bundle: .module) {
 					"Lorem"
 				}
 			}
@@ -228,7 +228,7 @@ struct TextBuilderMacroTests {
 		} expansion: {
 			"""
 			func text() -> Text {
-				Text(separator: nil) {
+				SwiftUI.Text(separator: nil) {
 				}
 			}
 			"""
@@ -260,7 +260,7 @@ struct TextBuilderMacroTests {
 		} expansion: {
 			"""
 			func text() -> Text {
-				Text(separator: nil) {
+				SwiftUI.Text(separator: nil) {
 					Text(verbatim: "Lorem").underline().foregroundColor(.blue)
 					if false {
 						"ipsum dolor"
@@ -307,7 +307,7 @@ struct TextBuilderMacroTests {
 		} expansion: {
 			"""
 			func text() -> Text {
-				Text(separator: " ") {
+				SwiftUI.Text(separator: " ") {
 					Text(verbatim: "Lorem").underline().foregroundColor(.blue)
 					if false {
 						"ipsum dolor"
@@ -356,7 +356,7 @@ struct TextBuilderMacroTests {
 			"""
 			let separator = " "
 			func text() -> Text {
-				Text(separator: separator) {
+				SwiftUI.Text(separator: separator) {
 					Text(verbatim: "Lorem").underline().foregroundColor(.blue)
 					if false {
 						"ipsum dolor"

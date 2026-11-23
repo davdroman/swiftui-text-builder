@@ -10,7 +10,7 @@ extension Sequence<Text> {
 	/// single `Text` view with comma-separated string:
 	///
 	///     let cast = [Text("Vivien"), Text("Marlon"), Text("Kim")]
-	///     let list = cast.joined(separator: Text(", "))
+	///     let list = cast.joined(separator: Text(verbatim: ", "))
 	///     // Gives Text("Vivien, Marlon, Kim")
 	///
 	/// - Parameter separator: A `Text` view to insert between each of the elements
@@ -33,7 +33,8 @@ extension Sequence<Text> {
 /// A segment of text collected by ``TextSegmentBuilder``.
 ///
 /// Localized segments are resolved against the bundle passed to `Text(separator:default:bundle:content:)` when the
-/// text is built.
+/// text is built. This includes segments from a ``TextSegmentBuilder`` helper defined in another module, so pass the
+/// bundle that holds the helper's strings when they live elsewhere.
 public struct TextSegment {
 	@usableFromInline
 	enum Storage {
@@ -75,6 +76,11 @@ public enum TextSegmentBuilder {
 	@inlinable
 	public static func buildExpression(_ texts: [Text]) -> [TextSegment] {
 		texts.map { TextSegment(.text($0)) }
+	}
+
+	@inlinable
+	public static func buildExpression(_ segments: [TextSegment]) -> [TextSegment] {
+		segments
 	}
 
 	@inlinable
@@ -173,7 +179,7 @@ extension Text {
 	/// `separator` string between each received text component.
 	///
 	/// - Parameters:
-	///   - separator: The string to use as a separator between received text components.
+	///   - separator: The string to use as a separator between received text components, as verbatim text.
 	///   - default: The text to use when `content` produces no components.
 	///   - bundle: The bundle to look up localized string literals in. By default, the bundle that contains the
 	///     resources of the calling code, as `#bundle` gives.

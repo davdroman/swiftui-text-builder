@@ -11,6 +11,10 @@
 
 TextBuilder leverages the power of Swift [Macros](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/macros/) to solve this problem. The `@TextBuilder` macro transforms computed properties into builder-style closures, making text composition intuitive and readable.
 
+## Requirements
+
+Swift 6.4 (Xcode 27) or later, targeting iOS 15, Mac Catalyst 15, macOS 12, tvOS 15, visionOS 1, or watchOS 8 or later.
+
 ## Installation
 
 Add `TextBuilder` to your Swift Package Manager dependencies:
@@ -99,6 +103,18 @@ var mixedText: Text {
     String(2025)  // String values become verbatim Text
 }
 ```
+
+Because literals are localized, they behave like `Text("…")` in two more ways: Markdown in them is rendered, and `Text` values can be interpolated into them, keeping their styling:
+
+```swift
+@TextBuilder
+var summary: Text {
+    "**Bold** and _italic_"
+    "\(Text("3").bold()) items left"
+}
+```
+
+To show a literal exactly as written, use `Text(verbatim:)`.
 
 ### Attributed Strings and Images
 

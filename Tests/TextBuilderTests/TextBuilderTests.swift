@@ -164,6 +164,27 @@ struct TextBuilderTests {
 		)
 	}
 
+	@Test func `text can be interpolated into literals`() {
+		// Text interpolations can't be compared or dumped, so this only checks that the literal builds.
+		@TextBuilder
+		var sut: Text {
+			"\(Text(verbatim: "3").bold()) items"
+		}
+
+		_ = sut
+	}
+
+	@Test func `localized string key values are localized`() {
+		let key: LocalizedStringKey = "Hello"
+
+		@TextBuilder
+		var sut: Text {
+			key
+		}
+
+		expectNoDifference(sut, Text("Hello", bundle: #bundle))
+	}
+
 	@Test func `attributed strings and images become text`() {
 		var attributedString = AttributedString("Hello")
 		attributedString.inlinePresentationIntent = .stronglyEmphasized
@@ -196,6 +217,44 @@ struct TextBuilderTests {
 			String(customDumping: sut),
 			String(customDumping: Text(resource)),
 		)
+	}
+
+	@Test func `text arrays and segment builders are spliced in`() {
+		@TextSegmentBuilder
+		func greeting() -> [TextSegment] {
+			"Hello"
+			Text(verbatim: "world")
+		}
+
+		let texts = [Text(verbatim: "foo"), Text(verbatim: "bar")]
+
+		@TextBuilder(separator: " ")
+		var sut: Text {
+			greeting()
+			texts
+		}
+
+		expectNoDifference(
+			sut,
+			Text("Hello", bundle: #bundle) +
+				Text(verbatim: " ") +
+				Text(verbatim: "world") +
+				Text(verbatim: " ") +
+				Text(verbatim: "foo") +
+				Text(verbatim: " ") +
+				Text(verbatim: "bar"),
+		)
+	}
+
+	@Test func `availability checks`() {
+		@TextBuilder
+		var sut: Text {
+			if #available(iOS 17, macOS 14, tvOS 17, watchOS 10, *) {
+				Text(verbatim: "available")
+			}
+		}
+
+		expectNoDifference(sut, Text(verbatim: "available"))
 	}
 
 	@Test func `string literals are localized in the given bundle`() {

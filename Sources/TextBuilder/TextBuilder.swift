@@ -8,8 +8,8 @@ public import SwiftUI
 /// ## Behavior
 /// - Empty bodies produce `Text(verbatim: "")`.
 /// - You can mix `Text` values and string-like values. String literals, including interpolated ones, are localized
-///   like `Text("…")`. String values (e.g., a `String` variable or the result of `String(i)`) are treated as verbatim
-///   text.
+///   like `Text("…")`, so Markdown in them is rendered and `Text` values can be interpolated into them. String values
+///   (e.g., a `String` variable or the result of `String(i)`) are treated as verbatim text.
 /// - `AttributedString`, `LocalizedStringResource`, and `Image` values become text as the matching `Text`
 ///   initializers make them.
 /// - Control flow is supported: `if`/`else`, `if let`, and `for` loops can conditionally emit or repeat parts.
@@ -37,8 +37,9 @@ public import SwiftUI
 /// main bundle.
 ///
 /// ## Notes
-/// - The expansion relies on the ``Text.init(separator:default:bundle:content:)-(Text?,_,_,_)`` builder-style API
-///   that is included as part of this package, which performs concatenation and separator insertion.
+/// - The expansion relies on the
+///   ``SwiftUICore/Text/init(separator:default:bundle:content:)-(Text?,_,_,_)`` builder-style API that is
+///   included as part of this package, which performs concatenation and separator insertion.
 /// - Apply `@TextBuilder` to computed properties, getters, or functions that return `Text`.
 @attached(body)
 public macro TextBuilder(separator: Text? = nil, bundle: Bundle? = #bundle) = #externalMacro(
