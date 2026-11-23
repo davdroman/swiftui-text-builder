@@ -6,19 +6,18 @@ import PackageDescription
 let package = Package(
 	name: "swiftui-text-builder",
 	platforms: [
-		.iOS(.v13),
-		.macCatalyst(.v13),
-		.macOS(.v10_15),
-		.tvOS(.v13),
+		.iOS(.v15),
+		.macCatalyst(.v15),
+		.macOS(.v12),
+		.tvOS(.v15),
 		.visionOS(.v1),
-		.watchOS(.v6),
+		.watchOS(.v8),
 	],
 	products: [
 		.library(name: "TextBuilder", targets: ["TextBuilder"]),
 	],
 	targets: [
 		.target(name: "TextBuilder", dependencies: [
-			.product(name: "Builders", package: "swift-builders"),
 			"TextBuilderMacro",
 		]),
 		.testTarget(name: "TextBuilderTests", dependencies: [
@@ -39,7 +38,6 @@ let package = Package(
 )
 
 package.dependencies += [
-	.package(url: "https://github.com/davdroman/swift-builders", from: "0.10.0"),
 	.package(url: "https://github.com/pointfreeco/swift-custom-dump", from: "1.0.0"),
 	.package(url: "https://github.com/pointfreeco/swift-macro-testing", from: "0.7.0"),
 	.package(url: "https://github.com/swiftlang/swift-syntax", "604.0.0"..<"605.0.0"),

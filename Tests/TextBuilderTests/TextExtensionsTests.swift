@@ -1,4 +1,3 @@
-import Builders
 import CustomDump
 import SwiftUI
 import Testing
@@ -43,14 +42,14 @@ import TextBuilder
 
 	@Test func `init without separator`() {
 		expectNoDifference(
-			Text(content: textArrayBuilderText),
+			Text(content: textSegments),
 			Text("Lorem").underline().foregroundColor(.blue) +
 				Text("ipsum dolor") +
 				Text("sit").bold() +
 				Text("amet, consectetur"),
 		)
 		expectNoDifference(
-			Text(separator: nil, content: textArrayBuilderText),
+			Text(separator: nil, content: textSegments),
 			Text("Lorem").underline().foregroundColor(.blue) +
 				Text("ipsum dolor") +
 				Text("sit").bold() +
@@ -60,7 +59,7 @@ import TextBuilder
 
 	@Test func `init with blank separator`() {
 		expectNoDifference(
-			Text(separator: Text(""), content: textArrayBuilderText),
+			Text(separator: Text(""), content: textSegments),
 			Text("Lorem").underline().foregroundColor(.blue) +
 				Text("") +
 				Text("ipsum dolor") +
@@ -70,7 +69,7 @@ import TextBuilder
 				Text("amet, consectetur"),
 		)
 		expectNoDifference(
-			Text(separator: "", content: textArrayBuilderText),
+			Text(separator: "", content: textSegments),
 			Text("Lorem").underline().foregroundColor(.blue) +
 				Text(verbatim: "") +
 				Text("ipsum dolor") +
@@ -83,7 +82,7 @@ import TextBuilder
 
 	@Test func `init with space separator`() {
 		expectNoDifference(
-			Text(separator: Text(" "), content: textArrayBuilderText),
+			Text(separator: Text(" "), content: textSegments),
 			Text("Lorem").underline().foregroundColor(.blue) +
 				Text(" ") +
 				Text("ipsum dolor") +
@@ -93,7 +92,7 @@ import TextBuilder
 				Text("amet, consectetur"),
 		)
 		expectNoDifference(
-			Text(separator: " ", content: textArrayBuilderText),
+			Text(separator: " ", content: textSegments),
 			Text("Lorem").underline().foregroundColor(.blue) +
 				Text(verbatim: " ") +
 				Text("ipsum dolor") +
@@ -106,7 +105,7 @@ import TextBuilder
 
 	@Test func `init with newline separator`() {
 		expectNoDifference(
-			Text(separator: Text("\n"), content: textArrayBuilderText),
+			Text(separator: Text("\n"), content: textSegments),
 			Text("Lorem").underline().foregroundColor(.blue) +
 				Text("\n") +
 				Text("ipsum dolor") +
@@ -116,7 +115,7 @@ import TextBuilder
 				Text("amet, consectetur"),
 		)
 		expectNoDifference(
-			Text(separator: "\n", content: textArrayBuilderText),
+			Text(separator: "\n", content: textSegments),
 			Text("Lorem").underline().foregroundColor(.blue) +
 				Text(verbatim: "\n") +
 				Text("ipsum dolor") +
@@ -124,6 +123,27 @@ import TextBuilder
 				Text("sit").bold() +
 				Text(verbatim: "\n") +
 				Text("amet, consectetur"),
+		)
+	}
+
+	@Test func `init localizes string literals in the given bundle`() {
+		let bundle = Bundle(for: BundleToken.self)
+
+		expectNoDifference(
+			Text(separator: " ", bundle: bundle) {
+				"Lorem"
+				Text("ipsum")
+			},
+			Text("Lorem", bundle: bundle) +
+				Text(verbatim: " ") +
+				Text("ipsum"),
+		)
+	}
+
+	@Test func `init with string separator uses default when empty`() {
+		expectNoDifference(
+			Text(separator: " ", default: Text(verbatim: "Empty")) {},
+			Text(verbatim: "Empty"),
 		)
 	}
 }
@@ -138,8 +158,8 @@ extension TextExtensionsTests {
 		]
 	}
 
-	@ArrayBuilder<Text>
-	private func textArrayBuilderText() -> [Text] {
+	@TextSegmentBuilder
+	private func textSegments() -> [TextSegment] {
 		Text("Lorem").underline().foregroundColor(.blue)
 		Text("ipsum dolor")
 		Text("sit").bold()

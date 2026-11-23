@@ -1,3 +1,4 @@
+public import Foundation
 public import SwiftUI
 
 /// A body macro that lets you build a single `SwiftUI.Text` from multiple parts using a builder-style closure. Write
@@ -24,12 +25,21 @@ public import SwiftUI
 /// }
 /// ```
 ///
+/// ## Localization
+/// String literals are looked up in the bundle that contains the resources of the code they're written in, as
+/// `#bundle` gives: the app's bundle in an app, or the resource bundle of a framework or Swift package target. Pass
+/// `bundle:` to look them up somewhere else.
+///
+/// A Swift package target without resources has no bundle of its own, so `#bundle` fails to compile there with "No
+/// resource bundle is available for this module". Pass the bundle that holds its strings instead, or `nil` for the
+/// main bundle.
+///
 /// ## Notes
-/// - The expansion relies on the ``Text.init(separator:default:content:)-(Text?,_,_)`` builder-style API that is
-///   included as part of this package, which performs concatenation and separator insertion.
+/// - The expansion relies on the ``Text.init(separator:default:bundle:content:)-(Text?,_,_,_)`` builder-style API
+///   that is included as part of this package, which performs concatenation and separator insertion.
 /// - Apply `@TextBuilder` to computed properties, getters, or functions that return `Text`.
 @attached(body)
-public macro TextBuilder(separator: Text? = nil) = #externalMacro(
+public macro TextBuilder(separator: Text? = nil, bundle: Bundle? = #bundle) = #externalMacro(
 	module: "TextBuilderMacro",
 	type: "TextBuilderMacro",
 )
@@ -37,7 +47,7 @@ public macro TextBuilder(separator: Text? = nil) = #externalMacro(
 /// Convenience overload that accepts any `StringProtocol` as the separator, which is treated as verbatim text
 /// (equivalent to `Text(verbatim: separator)`).
 @attached(body)
-public macro TextBuilder<Separator: StringProtocol>(separator: Separator) = #externalMacro(
+public macro TextBuilder<Separator: StringProtocol>(separator: Separator, bundle: Bundle? = #bundle) = #externalMacro(
 	module: "TextBuilderMacro",
 	type: "TextBuilderMacro",
 )

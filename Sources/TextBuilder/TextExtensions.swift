@@ -1,4 +1,4 @@
-public import Builders
+public import Foundation
 public import SwiftUI
 
 extension Sequence<Text> {
@@ -30,18 +30,101 @@ extension Sequence<Text> {
 	}
 }
 
-extension ArrayBuilder<Text> {
-	/// Turns a string literal into localized text, as `Text(_:tableName:bundle:comment:)` does.
-	@inlinable
-	public static func buildExpression(_ key: LocalizedStringKey) -> [Text] {
-		[Text(key)]
+/// A segment of text collected by ``TextSegmentBuilder``.
+///
+/// Localized segments are resolved against the bundle passed to `Text(separator:default:bundle:content:)` when the
+/// text is built.
+public struct TextSegment {
+	@usableFromInline
+	enum Storage {
+		case text(Text)
+		case localized(LocalizedStringKey)
 	}
 
-	/// Turns a string value into verbatim text, as `Text(_:)` does for any `StringProtocol`.
+	@usableFromInline
+	let storage: Storage
+
+	@inlinable
+	init(_ storage: Storage) {
+		self.storage = storage
+	}
+
+	@inlinable
+	func text(bundle: Bundle?) -> Text {
+		switch storage {
+		case let .text(text):
+			text
+		case let .localized(key):
+			Text(key, bundle: bundle)
+		}
+	}
+}
+
+/// A result builder that collects text segments from `Text` values and strings.
+///
+/// String literals, including interpolated ones, become localized text, like `Text("…")`. String values become
+/// verbatim text, like `Text(someString)`.
+@resultBuilder
+public enum TextSegmentBuilder {
+	@inlinable
+	public static func buildExpression(_ text: Text) -> [TextSegment] {
+		[TextSegment(.text(text))]
+	}
+
+	@inlinable
+	public static func buildExpression(_ texts: [Text]) -> [TextSegment] {
+		texts.map { TextSegment(.text($0)) }
+	}
+
+	@inlinable
+	public static func buildExpression(_ key: LocalizedStringKey) -> [TextSegment] {
+		[TextSegment(.localized(key))]
+	}
+
 	@_disfavoredOverload
 	@inlinable
-	public static func buildExpression(_ expression: some StringProtocol) -> [Text] {
-		[Text(expression)]
+	public static func buildExpression(_ string: some StringProtocol) -> [TextSegment] {
+		[TextSegment(.text(Text(string)))]
+	}
+
+	@inlinable
+	public static func buildBlock() -> [TextSegment] {
+		[]
+	}
+
+	@inlinable
+	public static func buildPartialBlock(first: [TextSegment]) -> [TextSegment] {
+		first
+	}
+
+	@inlinable
+	public static func buildPartialBlock(accumulated: [TextSegment], next: [TextSegment]) -> [TextSegment] {
+		accumulated + next
+	}
+
+	@inlinable
+	public static func buildOptional(_ component: [TextSegment]?) -> [TextSegment] {
+		component ?? []
+	}
+
+	@inlinable
+	public static func buildEither(first component: [TextSegment]) -> [TextSegment] {
+		component
+	}
+
+	@inlinable
+	public static func buildEither(second component: [TextSegment]) -> [TextSegment] {
+		component
+	}
+
+	@inlinable
+	public static func buildArray(_ components: [[TextSegment]]) -> [TextSegment] {
+		components.flatMap(\.self)
+	}
+
+	@inlinable
+	public static func buildLimitedAvailability(_ component: [TextSegment]) -> [TextSegment] {
+		component
 	}
 }
 
@@ -52,13 +135,17 @@ extension Text {
 	/// - Parameters:
 	///   - separator: The text to use as a separator between received text components.
 	///     By default there is no separator.
-	///   - content: A text array builder that creates text components.
+	///   - default: The text to use when `content` produces no components.
+	///   - bundle: The bundle to look up localized string literals in. By default, the bundle that contains the
+	///     resources of the calling code, as `#bundle` gives.
+	///   - content: A text segment builder that creates text components.
 	public init(
 		separator: Text? = nil,
 		default: Text = Text(verbatim: ""),
-		@ArrayBuilder<Text> content: () -> [Text],
+		bundle: Bundle? = #bundle,
+		@TextSegmentBuilder content: () -> [TextSegment],
 	) {
-		self = content().joined(separator: separator) ?? `default`
+		self = content().map { $0.text(bundle: bundle) }.joined(separator: separator) ?? `default`
 	}
 
 	/// Creates a combined text view based on the given `content` by inserting
@@ -66,13 +153,17 @@ extension Text {
 	///
 	/// - Parameters:
 	///   - separator: The string to use as a separator between received text components.
-	///   - content: A text array builder that creates text components.
+	///   - default: The text to use when `content` produces no components.
+	///   - bundle: The bundle to look up localized string literals in. By default, the bundle that contains the
+	///     resources of the calling code, as `#bundle` gives.
+	///   - content: A text segment builder that creates text components.
 	@inlinable
 	public init(
 		separator: some StringProtocol,
 		default: Text = Text(verbatim: ""),
-		@ArrayBuilder<Text> content: () -> [Text],
+		bundle: Bundle? = #bundle,
+		@TextSegmentBuilder content: () -> [TextSegment],
 	) {
-		self.init(separator: Text(separator), content: content)
+		self.init(separator: Text(separator), default: `default`, bundle: bundle, content: content)
 	}
 }

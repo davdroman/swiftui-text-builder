@@ -100,6 +100,23 @@ var mixedText: Text {
 }
 ```
 
+### Localization
+
+String literals are looked up in the bundle of the code they're written in, as [`#bundle`](https://developer.apple.com/documentation/foundation/bundle()) gives: the app's bundle in an app, or the resource bundle of a framework or Swift package target. Their keys are extracted into that target's String Catalog.
+
+To look them up somewhere else, pass `bundle:`:
+
+```swift
+@TextBuilder(separator: " ", bundle: .main)
+var greeting: Text {
+    "Hello"
+    "world"
+}
+```
+
+> [!IMPORTANT]
+> A Swift package target without resources has no bundle of its own, so `#bundle` fails to compile there with "No resource bundle is available for this module". Pass the bundle that holds its strings instead, or `bundle: nil` for the main bundle.
+
 ### Control Flow
 
 TextBuilder supports Swift's control flow statements:

@@ -1,4 +1,3 @@
-import Builders
 import CustomDump
 import SwiftUI
 import Testing
@@ -144,9 +143,9 @@ struct TextBuilderTests {
 
 		expectNoDifference(
 			sut,
-			Text("Hello") +
+			Text("Hello", bundle: #bundle) +
 				Text(verbatim: " ") +
-				Text("world"),
+				Text("world", bundle: #bundle),
 		)
 	}
 
@@ -161,8 +160,34 @@ struct TextBuilderTests {
 		// Localized interpolations don't compare equal, so compare their dumps instead.
 		expectNoDifference(
 			String(customDumping: sut),
-			String(customDumping: Text("\(count) items")),
+			String(customDumping: Text("\(count) items", bundle: #bundle)),
 		)
+	}
+
+	@Test func `string literals are localized in the given bundle`() {
+		let bundle = Bundle(for: BundleToken.self)
+
+		@TextBuilder(separator: " ", bundle: bundle)
+		var sut: Text {
+			"Hello"
+			Text("world")
+		}
+
+		expectNoDifference(
+			sut,
+			Text("Hello", bundle: bundle) +
+				Text(verbatim: " ") +
+				Text("world"),
+		)
+	}
+
+	@Test func `string literals are localized in the main bundle when bundle is nil`() {
+		@TextBuilder(bundle: nil)
+		var sut: Text {
+			"Hello"
+		}
+
+		expectNoDifference(sut, Text("Hello"))
 	}
 
 	@Test func `string values are verbatim`() {
@@ -220,3 +245,5 @@ struct TextBuilderTests {
 		)
 	}
 }
+
+final class BundleToken {}

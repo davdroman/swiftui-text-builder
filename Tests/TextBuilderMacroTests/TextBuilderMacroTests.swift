@@ -181,6 +181,44 @@ struct TextBuilderMacroTests {
 		}
 	}
 
+	@Test func `computed property with bundle`() {
+		assertMacro {
+			"""
+			@TextBuilder(bundle: .module)
+			var text: Text {
+				"Lorem"
+			}
+			"""
+		} expansion: {
+			"""
+			var text: Text {
+				Text(separator: nil, bundle: .module) {
+					"Lorem"
+				}
+			}
+			"""
+		}
+	}
+
+	@Test func `computed property with separator and bundle`() {
+		assertMacro {
+			"""
+			@TextBuilder(separator: " ", bundle: .module)
+			var text: Text {
+				"Lorem"
+			}
+			"""
+		} expansion: {
+			"""
+			var text: Text {
+				Text(separator: " ", bundle: .module) {
+					"Lorem"
+				}
+			}
+			"""
+		}
+	}
+
 	@Test func `function without implementation`() {
 		assertMacro {
 			"""
