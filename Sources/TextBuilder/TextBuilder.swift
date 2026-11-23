@@ -10,6 +10,8 @@ public import SwiftUI
 /// - You can mix `Text` values and string-like values. String literals, including interpolated ones, are localized
 ///   like `Text("…")`. String values (e.g., a `String` variable or the result of `String(i)`) are treated as verbatim
 ///   text.
+/// - `AttributedString`, `LocalizedStringResource`, and `Image` values become text as the matching `Text`
+///   initializers make them.
 /// - Control flow is supported: `if`/`else`, `if let`, and `for` loops can conditionally emit or repeat parts.
 /// - Modifiers applied to individual segments (e.g., `.bold()`, `.underline()`, `.foregroundColor(_:)`) are preserved
 ///   for those segments.

@@ -164,6 +164,40 @@ struct TextBuilderTests {
 		)
 	}
 
+	@Test func `attributed strings and images become text`() {
+		var attributedString = AttributedString("Hello")
+		attributedString.inlinePresentationIntent = .stronglyEmphasized
+
+		@TextBuilder(separator: " ")
+		var sut: Text {
+			attributedString
+			Image(systemName: "star")
+		}
+
+		expectNoDifference(
+			sut,
+			Text(attributedString) +
+				Text(verbatim: " ") +
+				Text(Image(systemName: "star")),
+		)
+	}
+
+	@available(iOS 16, macOS 13, tvOS 16, watchOS 9, *)
+	@Test func `localized string resources become text`() {
+		let resource = LocalizedStringResource("Hello")
+
+		@TextBuilder
+		var sut: Text {
+			resource
+		}
+
+		// Localized string resources don't compare equal, so compare their dumps instead.
+		expectNoDifference(
+			String(customDumping: sut),
+			String(customDumping: Text(resource)),
+		)
+	}
+
 	@Test func `string literals are localized in the given bundle`() {
 		let bundle = Bundle(for: BundleToken.self)
 

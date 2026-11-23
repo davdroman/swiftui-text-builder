@@ -60,10 +60,11 @@ public struct TextSegment {
 	}
 }
 
-/// A result builder that collects text segments from `Text` values and strings.
+/// A result builder that collects text segments from `Text` values, strings, attributed strings, and images.
 ///
 /// String literals, including interpolated ones, become localized text, like `Text("…")`. String values become
-/// verbatim text, like `Text(someString)`.
+/// verbatim text, like `Text(someString)`. Attributed strings, localized string resources, and images become text as
+/// the matching `Text` initializers make them.
 @resultBuilder
 public enum TextSegmentBuilder {
 	@inlinable
@@ -85,6 +86,26 @@ public enum TextSegmentBuilder {
 	@inlinable
 	public static func buildExpression(_ string: some StringProtocol) -> [TextSegment] {
 		[TextSegment(.text(Text(string)))]
+	}
+
+	@_disfavoredOverload
+	@inlinable
+	public static func buildExpression(_ attributedString: AttributedString) -> [TextSegment] {
+		[TextSegment(.text(Text(attributedString)))]
+	}
+
+	/// Turns a localized string resource into text. The resource is looked up in its own bundle, not the one passed to
+	/// `Text(separator:default:bundle:content:)`.
+	@available(iOS 16, macOS 13, tvOS 16, watchOS 9, *)
+	@_disfavoredOverload
+	@inlinable
+	public static func buildExpression(_ resource: LocalizedStringResource) -> [TextSegment] {
+		[TextSegment(.text(Text(resource)))]
+	}
+
+	@inlinable
+	public static func buildExpression(_ image: Image) -> [TextSegment] {
+		[TextSegment(.text(Text(image)))]
 	}
 
 	@inlinable

@@ -100,6 +100,19 @@ var mixedText: Text {
 }
 ```
 
+### Attributed Strings and Images
+
+`AttributedString`, `LocalizedStringResource`, and `Image` values can go in directly too:
+
+```swift
+@TextBuilder(separator: " ")
+var status: Text {
+    Image(systemName: "checkmark.circle")
+    attributedTitle
+    LocalizedStringResource("status.done")
+}
+```
+
 ### Localization
 
 String literals are looked up in the bundle of the code they're written in, as [`#bundle`](https://developer.apple.com/documentation/foundation/bundle()) gives: the app's bundle in an app, or the resource bundle of a framework or Swift package target. Their keys are extracted into that target's String Catalog.
